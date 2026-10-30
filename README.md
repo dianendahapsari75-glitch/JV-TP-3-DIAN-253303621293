@@ -1,4 +1,4 @@
-## Bagian C - Fitur Analitik findStrongest()
+# Bagian C - Fitur Analitik findStrongest()
 
 
 ## Method yang dirancang

@@ -133,5 +133,12 @@ public class Character {
         return this.name.equals(other.name);               // bandingkan isi atribut name (String punya equals sendiri)
     }
 
+        // [BARU - TP5] hashCode(): dibuat berpasangan dengan equals()
+    // Dihitung dari atribut yang sama dengan equals(), yaitu name
+    @Override
+    public int hashCode() {
+        return name.hashCode();
+    }
+
 
 }

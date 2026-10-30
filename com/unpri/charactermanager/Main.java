@@ -28,5 +28,20 @@ public class Main {
         System.out.println(">> Nama karakter: " + hero.getName());
         System.out.println(">> Jenis karakter: " + hero.getType());
         System.out.println(">> HP saat ini: " + hero.getHitPoints());
+                // [BARU - TP3] demo setter yang baru ditambahkan
+        System.out.println();
+        System.out.println(">> Demo setter baru");
+        wizard.setName("Merlin the Great");     // mengubah nama lewat setter
+        wizard.setHitPoints(200);               // mengubah HP langsung lewat setter
+        System.out.println("Setelah diubah: " + wizard);
+
+        // [BARU - TP3] demo validasi: level 0 harus ditolak
+        System.out.println();
+        System.out.println(">> Demo validasi level");
+        try {
+            scout.setLevel(0);                  // level 0 melanggar aturan, akan melempar exception
+        } catch (IllegalArgumentException e) {  // exception ditangkap supaya program tidak crash
+            System.out.println("Error ditangkap: " + e.getMessage());
+        }
     }
 }

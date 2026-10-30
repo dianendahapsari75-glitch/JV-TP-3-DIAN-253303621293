@@ -66,6 +66,34 @@ public class Character {
         this.hitPoints = calculateBaseHP();      // statistik dihitung ULANG setiap level berubah
         this.attackPower = calculateBaseAttack();
     }
+        // [BARU - TP3] setter untuk atribut yang sebelumnya belum punya setter
+    public void setName(String name) {
+        if (name == null || name.trim().isEmpty()) {   // validasi: nama tidak boleh kosong
+            throw new IllegalArgumentException("Nama tidak boleh kosong");
+        }
+        this.name = name;
+    }
+
+    public void setType(CharacterType type) {
+        if (type == null) {                            // validasi: jenis karakter harus diisi
+            throw new IllegalArgumentException("Jenis karakter tidak boleh null");
+        }
+        this.type = type;
+    }
+
+    public void setHitPoints(int hitPoints) {
+        if (hitPoints < 0) {                           // validasi: HP tidak boleh negatif
+            throw new IllegalArgumentException("HP tidak boleh negatif");
+        }
+        this.hitPoints = hitPoints;
+    }
+
+    public void setAttackPower(int attackPower) {
+        if (attackPower < 0) {                         // validasi: attack tidak boleh negatif
+            throw new IllegalArgumentException("Attack tidak boleh negatif");
+        }
+        this.attackPower = attackPower;
+    }
 
     // ===== toString(): representasi teks object, berguna untuk debugging =====
     @Override

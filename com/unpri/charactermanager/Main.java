@@ -13,8 +13,9 @@ public class Main {
         CharacterManager manager = new CharacterManager();
         manager.addCharacter(new Character("Arjuna", CharacterType.WARRIOR, 5));
         manager.addCharacter(new Character("Merlin", CharacterType.MAGE, 3));
-        manager.addCharacter(new Character("Athena", CharacterType.ARCHER, 4));
-        
+        manager.addCharacter(new Character("Athena", CharacterType.ARCHER, 10));   // [DIUBAH - TP8 Bagian B] level 4 jadi 10 untuk bukti statistik berubah
+        manager.addCharacter(new Character("Selene", CharacterType.HEALER, 2));      // [BARU - TP8 Bagian B] karakter ke-5
+        manager.addCharacter(new Character("Lancelot", CharacterType.WARRIOR, 7));   // [BARU - TP8 Bagian B] karakter ke-4
 
         // 2. Jalankan GUI dengan AMAN di Event Dispatch Thread
         SwingUtilities.invokeLater(() -> {

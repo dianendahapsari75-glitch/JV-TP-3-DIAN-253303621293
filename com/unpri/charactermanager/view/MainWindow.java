@@ -42,8 +42,10 @@ public class MainWindow extends JFrame {
             JLabel characterLabel = new JLabel(info);
             mainPanel.add(characterLabel);   // setiap karakter mendapat JLabel sendiri
         }
+        
 
         add(mainPanel);
     }
+    
 
 }

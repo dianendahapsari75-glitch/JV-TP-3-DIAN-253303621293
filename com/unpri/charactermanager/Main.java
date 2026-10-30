@@ -43,5 +43,24 @@ public class Main {
         } catch (IllegalArgumentException e) {  // exception ditangkap supaya program tidak crash
             System.out.println("Error ditangkap: " + e.getMessage());
         }
+
+                // [BARU - TP3 Bagian B] demo atribut mana dan method isAlive()
+        System.out.println();
+        System.out.println(">> Demo mana dan isAlive");
+        Character healer = new Character("Selene", CharacterType.HEALER, 2);  // 1 karakter baru
+        healer.setMana(80);                                  // set mana lewat setter
+        System.out.println(healer);                          // toString() sekarang menampilkan mana
+        System.out.println("Mana " + healer.getName() + ": " + healer.getMana());
+        System.out.println("Apakah " + healer.getName() + " masih hidup? " + healer.isAlive());
+
+        // [BARU - TP3 Bagian B] demo isAlive() saat HP = 0 dan validasi mana negatif
+        healer.setHitPoints(0);                              // HP jadi 0 lewat setter dari Bagian A
+        System.out.println("Setelah HP = 0, masih hidup? " + healer.isAlive());
+        try {
+            healer.setMana(-10);                             // mana negatif harus ditolak
+        } catch (IllegalArgumentException e) {
+            System.out.println("Error ditangkap: " + e.getMessage());
+        }
     }
+    
 }

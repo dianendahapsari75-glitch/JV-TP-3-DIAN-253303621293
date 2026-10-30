@@ -14,6 +14,7 @@ public class Character {
     private int level;
     private int hitPoints;
     private int attackPower;
+    private int mana;   // [BARU - TP3 Bagian B] atribut mana, private sesuai Encapsulation
 
     // ===== CONSTRUCTOR 1: untuk membuat karakter BARU =====
     // Dipakai saat user membuat karakter dari form (belum punya id dari database)
@@ -94,6 +95,21 @@ public class Character {
         }
         this.attackPower = attackPower;
     }
+        // [BARU - TP3 Bagian B] getter mana
+    public int getMana() { return mana; }
+
+    // [BARU - TP3 Bagian B] setter mana dengan validasi
+    public void setMana(int mana) {
+        if (mana < 0) {                                // validasi: mana tidak boleh negatif
+            throw new IllegalArgumentException("Mana tidak boleh negatif");
+        }
+        this.mana = mana;
+    }
+
+    // [BARU - TP3 Bagian B] cek apakah karakter masih hidup
+    public boolean isAlive() {
+        return hitPoints > 0;                          // true kalau HP lebih dari 0
+    }
 
     // ===== toString(): representasi teks object, berguna untuk debugging =====
     @Override
@@ -103,7 +119,8 @@ public class Character {
                ", type=" + type +
                ", level=" + level +
                ", hp=" + hitPoints +
-               ", atk=" + attackPower + '}';
+               ", atk=" + attackPower +
+               ", mana=" + mana + '}';     // [DIUBAH - TP3 Bagian B] tambah mana di output
     
     }   // kurung kurawal penutup CLASS Character — pastikan jumlah buka/tutup seimbang!
 

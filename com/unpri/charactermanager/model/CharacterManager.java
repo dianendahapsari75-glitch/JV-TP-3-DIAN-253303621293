@@ -69,4 +69,27 @@ public class CharacterManager {
         return new ArrayList<>(characterList);        // defensive copy — lihat Halaman 7 untuk eksperimen
     }
 
+        // [BARU - TP5 Bagian B] menghitung rata-rata level semua karakter
+    public double getAverageLevel() {
+        if (characterList.isEmpty()) {            // list kosong: kembalikan 0 supaya tidak ada pembagian dengan nol
+            return 0;
+        }
+        int total = 0;
+        for (Character c : characterList) {       // jumlahkan level semua karakter
+            total += c.getLevel();
+        }
+        return (double) total / characterList.size();   // (double) agar hasilnya desimal, bukan dibulatkan
+    }
+
+    // [BARU - TP5 Bagian B] mencari semua karakter dengan tipe tertentu
+    public ArrayList<Character> findByType(CharacterType type) {
+        ArrayList<Character> hasil = new ArrayList<>();   // list baru untuk menampung hasil
+        for (Character c : characterList) {
+            if (c.getType() == type) {                    // enum dibandingkan dengan == (aman dan standar)
+                hasil.add(c);
+            }
+        }
+        return hasil;                                     // kalau tidak ada yang cocok, list kosong (bukan null)
+    }
+
 }   // kurung kurawal penutup class CharacterManager

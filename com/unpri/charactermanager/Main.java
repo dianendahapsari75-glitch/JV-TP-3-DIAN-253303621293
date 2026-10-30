@@ -60,5 +60,26 @@ public class Main {
 
         System.out.println("Total di manager asli: " + manager.getTotalCharacters());
         System.out.println("Total di salinan list : " + salinanList.size());
+
+                // ===== [BARU - TP5 Bagian B] Uji getAverageLevel() =====
+        System.out.println("\n--- Uji getAverageLevel() ---");
+        CharacterManager managerKosong = new CharacterManager();      // manager baru tanpa karakter
+        System.out.println("Rata-rata level (list kosong): " + managerKosong.getAverageLevel());
+        System.out.println("Rata-rata level (manager asli): " + manager.getAverageLevel());
+
+        // ===== [BARU - TP5 Bagian B] Uji findByType() =====
+        System.out.println("\n--- Uji findByType() ---");
+        manager.addCharacter(new Character("Lancelot", CharacterType.WARRIOR, 7));   // tambah 1 WARRIOR lagi untuk bahan uji
+
+        java.util.ArrayList<Character> daftarWarrior = manager.findByType(CharacterType.WARRIOR);
+        System.out.println("Jumlah WARRIOR: " + daftarWarrior.size());
+        for (Character c : daftarWarrior) {
+            System.out.println(c);
+        }
+
+        java.util.ArrayList<Character> daftarHealer = manager.findByType(CharacterType.HEALER);
+        System.out.println("Jumlah HEALER: " + daftarHealer.size());      // tidak ada HEALER, hasilnya list kosong
+
     }
+    
 }

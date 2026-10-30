@@ -89,7 +89,31 @@ public class CharacterManager {
                 hasil.add(c);
             }
         }
-        return hasil;                                     // kalau tidak ada yang cocok, list kosong (bukan null)
+        return hasil;   
+        // kalau tidak ada yang cocok, list kosong (bukan null)
+    }
+        /**
+     * Mencari karakter dengan attackPower tertinggi.
+     * Yang dikembalikan adalah SALINAN, bukan object asli di dalam list,
+     * sehingga perubahan di luar tidak memengaruhi data manager.
+     * Jika attackPower sama, karakter yang lebih dulu ditambahkan yang dipilih.
+     * @return salinan Character terkuat, atau null jika list kosong
+     */
+    public Character findStrongest() {
+        if (characterList.isEmpty()) {               // list kosong: tidak ada yang bisa dibandingkan
+            return null;
+        }
+        Character terkuat = characterList.get(0);    // anggap karakter pertama yang terkuat
+        for (Character c : characterList) {
+            if (c.getAttackPower() > terkuat.getAttackPower()) {   // pakai > (bukan >=) agar yang lebih dulu menang saat seri
+                terkuat = c;
+            }
+        }
+        // buat salinan lewat constructor kedua supaya object asli tidak bocor keluar
+        Character salinan = new Character(terkuat.getId(), terkuat.getName(), terkuat.getType(),
+                                          terkuat.getLevel(), terkuat.getHitPoints(), terkuat.getAttackPower());
+        salinan.setMana(terkuat.getMana());          // constructor kedua tidak mengisi mana, jadi disalin manual
+        return salinan;
     }
 
 }   // kurung kurawal penutup class CharacterManager

@@ -80,6 +80,23 @@ public class Main {
         java.util.ArrayList<Character> daftarHealer = manager.findByType(CharacterType.HEALER);
         System.out.println("Jumlah HEALER: " + daftarHealer.size());      // tidak ada HEALER, hasilnya list kosong
 
+                // ===== [BARU - TP5 Bagian C] Uji findStrongest() =====
+        System.out.println("\n--- Uji findStrongest() ---");
+        CharacterManager managerUji = new CharacterManager();    // manager baru agar datanya bersih
+        managerUji.addCharacter(new Character("Arjuna", CharacterType.WARRIOR, 5));
+        managerUji.addCharacter(new Character("Merlin", CharacterType.MAGE, 3));
+        managerUji.addCharacter(new Character("Freya", CharacterType.ARCHER, 4));
+        managerUji.addCharacter(new Character("Gandalf", CharacterType.MAGE, 6));
+
+        Character terkuat = managerUji.findStrongest();
+        System.out.println("Karakter terkuat: " + terkuat);
+
+        terkuat.setLevel(99);                                    // ubah SALINAN, bukan object asli
+        System.out.println("Level salinan setelah diubah: " + terkuat.getLevel());
+        System.out.println("Level Gandalf di manager: " + managerUji.findByName("Gandalf").getLevel());
+
+        System.out.println("Terkuat (list kosong): " + new CharacterManager().findStrongest());   // harus null
+
     }
     
 }

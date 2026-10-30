@@ -1,66 +1,64 @@
-package com.unpri.charactermanager;
+package com.unpri.charactermanager;   // [BARU - TP5] deklarasi package, sesuai letak file di folder charactermanager
 
 import com.unpri.charactermanager.model.Character;
 import com.unpri.charactermanager.model.CharacterType;
+import com.unpri.charactermanager.model.CharacterManager;
 
 public class Main {
-    // ...
-    public static void main(String[] args) {              // method main: titik awal eksekusi program
+    public static void main(String[] args) {
 
-        System.out.println("=== Character Manager v0.1 ===");
+        System.out.println("=== Character Manager v0.2 — CRUD Test ===\n");
 
-        // Membuat 3 object Character menggunakan constructor pertama
-        Character hero = new Character("Arjuna", CharacterType.WARRIOR, 5);
-        Character wizard = new Character("Merlin", CharacterType.MAGE, 3);
-        Character scout = new Character("Athena", CharacterType.ARCHER, 4);
+        CharacterManager manager = new CharacterManager();
 
-        // Menampilkan ketiganya menggunakan toString()
-        System.out.println(hero);
-        System.out.println(wizard);
-        System.out.println(scout);
+        // 1. Tambah beberapa karakter
+        manager.addCharacter(new Character("Arjuna", CharacterType.WARRIOR, 5));
+        manager.addCharacter(new Character("Merlin", CharacterType.MAGE, 3));
+        manager.addCharacter(new Character("Athena", CharacterType.ARCHER, 4));
 
+        // 2. Coba tambah DUPLIKAT nama — seharusnya DITOLAK
         System.out.println();
-        System.out.println(">> " + hero.getName() + " level up!");
-        hero.setLevel(hero.getLevel() + 1);     // naik 1 level, HP & Attack dihitung ulang otomatis
-        System.out.println("After level up: " + hero);
+        manager.addCharacter(new Character("Arjuna", CharacterType.HEALER, 1));
 
-        System.out.println();
-        System.out.println(">> Nama karakter: " + hero.getName());
-        System.out.println(">> Jenis karakter: " + hero.getType());
-        System.out.println(">> HP saat ini: " + hero.getHitPoints());
-                // [BARU - TP3] demo setter yang baru ditambahkan
-        System.out.println();
-        System.out.println(">> Demo setter baru");
-        wizard.setName("Merlin the Great");     // mengubah nama lewat setter
-        wizard.setHitPoints(200);               // mengubah HP langsung lewat setter
-        System.out.println("Setelah diubah: " + wizard);
+        // 3. Tampilkan total karakter
+        System.out.println("\nTotal karakter saat ini: " + manager.getTotalCharacters());
 
-        // [BARU - TP3] demo validasi: level 0 harus ditolak
-        System.out.println();
-        System.out.println(">> Demo validasi level");
-        try {
-            scout.setLevel(0);                  // level 0 melanggar aturan, akan melempar exception
-        } catch (IllegalArgumentException e) {  // exception ditangkap supaya program tidak crash
-            System.out.println("Error ditangkap: " + e.getMessage());
+        // 4. Cari karakter
+        System.out.println("\n--- Pencarian ---");
+        Character hasil = manager.findByName("Merlin");
+        System.out.println(hasil != null ? "Ditemukan: " + hasil : "Tidak ditemukan");
+
+        Character tidakAda = manager.findByName("Zeus");
+        System.out.println(tidakAda != null ? "Ditemukan: " + tidakAda : "Zeus tidak ditemukan (sesuai harapan)");
+
+        // 5. Hapus karakter
+        System.out.println("\n--- Penghapusan ---");
+        manager.removeCharacter("Athena");
+        System.out.println("Total setelah hapus: " + manager.getTotalCharacters());
+
+        // 6. Tampilkan semua karakter yang tersisa
+        System.out.println("\n--- Daftar Karakter Tersisa ---");
+        for (Character c : manager.getAllCharacters()) {
+            System.out.println(c);
         }
 
-                // [BARU - TP3 Bagian B] demo atribut mana dan method isAlive()
-        System.out.println();
-        System.out.println(">> Demo mana dan isAlive");
-        Character healer = new Character("Selene", CharacterType.HEALER, 2);  // 1 karakter baru
-        healer.setMana(80);                                  // set mana lewat setter
-        System.out.println(healer);                          // toString() sekarang menampilkan mana
-        System.out.println("Mana " + healer.getName() + ": " + healer.getMana());
-        System.out.println("Apakah " + healer.getName() + " masih hidup? " + healer.isAlive());
+        // ===== EKSPERIMEN: Object Reference =====
+        System.out.println("\n--- Eksperimen Reference ---");
 
-        // [BARU - TP3 Bagian B] demo isAlive() saat HP = 0 dan validasi mana negatif
-        healer.setHitPoints(0);                              // HP jadi 0 lewat setter dari Bagian A
-        System.out.println("Setelah HP = 0, masih hidup? " + healer.isAlive());
-        try {
-            healer.setMana(-10);                             // mana negatif harus ditolak
-        } catch (IllegalArgumentException e) {
-            System.out.println("Error ditangkap: " + e.getMessage());
-        }
+        Character asli = manager.findByName("Arjuna");
+        Character duplikatReferensi = asli;              // menyalin REFERENSI, bukan membuat object baru
+
+        System.out.println("Level Arjuna sebelum: " + asli.getLevel());
+        duplikatReferensi.setLevel(99);                  // mengubah LEWAT variabel lain
+
+        System.out.println("Level Arjuna sesudah (lewat 'asli'): " + asli.getLevel());
+        System.out.println("asli == duplikatReferensi? " + (asli == duplikatReferensi));
+
+        // Bandingkan dengan getAllCharacters() yang mengembalikan SALINAN LIST:
+        java.util.ArrayList<Character> salinanList = manager.getAllCharacters();
+        salinanList.add(new Character("Hantu", CharacterType.MAGE, 1));   // tambah ke SALINAN list
+
+        System.out.println("Total di manager asli: " + manager.getTotalCharacters());
+        System.out.println("Total di salinan list : " + salinanList.size());
     }
-    
 }

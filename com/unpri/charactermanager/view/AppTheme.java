@@ -37,6 +37,13 @@ public class AppTheme {
             BorderFactory.createLineBorder(WARNA_GARIS),
             BorderFactory.createEmptyBorder(8, 12, 8, 12));
 
+        // ===== [BARU - TP13 Bagian B] KONSTANTA UNTUK KARAKTER LEVEL TINGGI DAN PEMULA =====
+    public static final int BATAS_LEVEL_TINGGI = 5;    // level >= nilai ini tampil emas dan tebal
+    public static final int BATAS_LEVEL_PEMULA = 1;    // level <= nilai ini dinonaktifkan (abu-abu)
+
+    public static final Color WARNA_EMAS = new Color(184, 134, 11);   // emas gelap agar tetap terbaca di atas warna pastel
+    public static final Font FONT_KARTU_TEBAL = new Font("SansSerif", Font.BOLD, 14);
+    
     // ===== METHOD: pilih warna kartu berdasarkan role =====
     public static Color colorFor(CharacterType type) {
         switch (type) {

@@ -53,12 +53,28 @@ public class MainWindow extends JFrame {
             JLabel kartu = new JLabel(info);
             kartu.setOpaque(true);                                  // WAJIB: JLabel transparan, tanpa ini warna latar tidak tampil
             kartu.setBackground(AppTheme.colorFor(c.getType()));    // warna sesuai role
-            kartu.setForeground(AppTheme.WARNA_TEKS);
-            kartu.setFont(AppTheme.FONT_KARTU);
             kartu.setBorder(AppTheme.BORDER_KARTU);
+
+            // [DIUBAH - TP13 Bagian B] Mini-Challenge: level tinggi tampil emas dan tebal
+            if (c.getLevel() >= AppTheme.BATAS_LEVEL_TINGGI) {      // batas dari konstanta bernama, bukan angka 5 langsung
+                kartu.setForeground(AppTheme.WARNA_EMAS);
+                kartu.setFont(AppTheme.FONT_KARTU_TEBAL);
+            } else {
+                kartu.setForeground(AppTheme.WARNA_TEKS);
+                kartu.setFont(AppTheme.FONT_KARTU);
+            }
+
+            // [BARU - TP13 Bagian B] properti tambahan 1: tooltip berisi detail yang tidak ada di kartu
+            kartu.setToolTipText("Mana: " + c.getMana() + " | Status: " + (c.isAlive() ? "hidup" : "gugur"));
+
+            // [BARU - TP13 Bagian B] properti tambahan 2: karakter pemula dinonaktifkan
+            if (c.getLevel() <= AppTheme.BATAS_LEVEL_PEMULA) {
+                kartu.setEnabled(false);                            // teks otomatis tampil abu-abu
+            }
+
             panelKartu.add(kartu);
         }
-        mainPanel.add(panelKartu, BorderLayout.CENTER);
+        mainPanel.add(panelKartu, BorderLayout.CENTER);             // kartu ditaruh di tengah
 
         // ----- statistik rata-rata level di bagian bawah -----
         int totalLevel = 0;

@@ -1,61 +1,74 @@
 package com.unpri.charactermanager.view;
 
-import javax.swing.JFrame;
-import javax.swing.JPanel;
-import javax.swing.JLabel;
+import java.awt.Color;
+import java.awt.Cursor;
+import java.awt.Dimension;
+import java.awt.GridLayout;
 import java.util.ArrayList;
+import javax.swing.BorderFactory;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.SwingConstants;
 import com.unpri.charactermanager.model.Character;
 
-/**
- * Jendela utama aplikasi Character Manager.
- * Menampilkan daftar karakter yang diterima dari luar (bukan dibuat sendiri).
- */
 public class MainWindow extends JFrame {
 
-    private JPanel mainPanel;
-    private ArrayList<Character> characterList;   // data yang akan ditampilkan
+    private JPanel mainPanel;                      // container utama
+    private ArrayList<Character> characterList;    // data dari Main.java (Model)
 
     public MainWindow(ArrayList<Character> characterList) {
-        super("Character Manager v0.3");    // judul title bar
-        this.characterList = characterList;  // simpan data yang diterima dari Main.java
+        super("Character Manager v0.4");           // versi naik: sprint #4
+        this.characterList = characterList;
 
-        initComponents();
+        initComponents();                          // 1. susun semua komponen dulu
 
-        setSize(500, 450);
+        pack();                                    // 2. ukuran jendela mengikuti isi
+        setMinimumSize(new Dimension(420, 300));   // 3. cegah jendela terlalu kecil
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setLocationRelativeTo(null);
+        setLocationRelativeTo(null);               // 4. pusatkan SETELAH pack()
     }
 
-    // [DIUBAH - TP8] isi method diganti: sekarang menampilkan data karakter
     private void initComponents() {
-        mainPanel = new JPanel();
+        // GridLayout(0, 1, 0, 8): berapa pun baris, 1 kolom, jarak vertikal 8 px.
+        // (Layout dibahas penuh di Pertemuan 5; di sini dipakai agar kartu tersusun rapi.)
+        mainPanel = new JPanel(new GridLayout(0, 1, 0, 8));
+        mainPanel.setBackground(AppTheme.BG_MAIN);                           // warna latar panel
+        mainPanel.setBorder(BorderFactory.createEmptyBorder(16, 16, 16, 16)); // padding luar
 
-        JLabel titleLabel = new JLabel("=== Daftar Karakter (" + characterList.size() + ") ===");
-        mainPanel.add(titleLabel);
+        mainPanel.add(createTitleLabel());          // judul di atas
 
-        // Loop setiap Character, buat SATU JLabel baru untuk masing-masing
-        for (Character c : characterList) {
-            String info = c.getName() + " | " + c.getType() +
-                          " | Lv." + c.getLevel() +
-                          " | HP:" + c.getHitPoints() +
-                          " | ATK:" + c.getAttackPower();
-            JLabel characterLabel = new JLabel(info);
-            mainPanel.add(characterLabel);   // setiap karakter mendapat JLabel sendiri
+        for (Character c : characterList) {          // satu kartu per karakter
+            mainPanel.add(createCharacterLabel(c));
         }
-                // [BARU - TP8 Bagian B] hitung rata-rata level dari data yang diterima
-        int totalLevel = 0;
-        for (Character c : characterList) {
-            totalLevel = totalLevel + c.getLevel();          // jumlahkan level semua karakter
-        }
-        double rataRata = 0;                                  // default 0 kalau list kosong (hindari bagi dengan nol)
-        if (characterList.size() > 0) {
-            rataRata = (double) totalLevel / characterList.size();   // (double) agar hasilnya desimal
-        }
-        JLabel statistikLabel = new JLabel("Rata-rata Level: " + String.format("%.1f", rataRata));
-        mainPanel.add(statistikLabel);                        // ditambahkan SETELAH loop, jadi muncul di bawah daftar
 
-        add(mainPanel);
+        add(mainPanel);                             // pasang panel ke JFrame
     }
-    
 
+    /** Membuat judul layar. */
+    private JLabel createTitleLabel() {
+        JLabel lbl = new JLabel("Daftar Karakter (" + characterList.size() + ")",
+                                SwingConstants.CENTER);   // teks di tengah label
+        lbl.setFont(AppTheme.FONT_TITLE);                 // font judul dari tema
+        lbl.setForeground(AppTheme.TEXT_MAIN);            // warna teks judul
+        return lbl;
+    }
+
+    /** Membuat satu kartu karakter (JLabel berwarna sesuai role). */
+    private JLabel createCharacterLabel(Character c) {
+        String info = c.getName() + " | " + c.getType()
+                    + " | Lv." + c.getLevel()
+                    + " | HP:" + c.getHitPoints()
+                    + " | ATK:" + c.getAttackPower();     // hanya MEMBACA lewat getter
+
+        JLabel lbl = new JLabel(info);
+        lbl.setFont(AppTheme.FONT_BODY);                          // font isi
+        lbl.setForeground(AppTheme.TEXT_LIGHT);                   // teks putih
+        lbl.setBackground(AppTheme.colorFor(c.getType()));        // warna dari role
+        lbl.setOpaque(true);                                      // WAJIB agar background tampak
+        lbl.setBorder(AppTheme.CARD_BORDER);                      // padding kartu
+        lbl.setToolTipText(AppTheme.describe(c.getType()));       // bantuan saat hover
+        lbl.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR)); // kursor tangan
+        return lbl;
+    }
 }

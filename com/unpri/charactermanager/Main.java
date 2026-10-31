@@ -16,6 +16,8 @@ public class Main {
         manager.addCharacter(new Character("Athena", CharacterType.ARCHER, 10));   // [DIUBAH - TP8 Bagian B] level 4 jadi 10 untuk bukti statistik berubah
         manager.addCharacter(new Character("Selene", CharacterType.HEALER, 2));      // [BARU - TP8 Bagian B] karakter ke-5
         manager.addCharacter(new Character("Lancelot", CharacterType.WARRIOR, 7));   // [BARU - TP8 Bagian B] karakter ke-4
+        manager.addCharacter(new Character("Freya", CharacterType.ARCHER, 1));     // [BARU - TP13 Bagian B] level 1, akan nonaktif
+        manager.addCharacter(new Character("Gandalf", CharacterType.MAGE, 6));     // [BARU - TP13 Bagian B] level 6, akan emas
 
         // 2. Jalankan GUI dengan AMAN di Event Dispatch Thread
         SwingUtilities.invokeLater(() -> {

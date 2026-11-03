@@ -18,6 +18,8 @@ public class Main {
         manager.addCharacter(new Character("Lancelot", CharacterType.WARRIOR, 7));   // [BARU - TP8 Bagian B] karakter ke-4
         manager.addCharacter(new Character("Freya", CharacterType.ARCHER, 1));     // [BARU - TP13 Bagian B] level 1, akan nonaktif
         manager.addCharacter(new Character("Gandalf", CharacterType.MAGE, 6));     // [BARU - TP13 Bagian B] level 6, akan emas
+        manager.addCharacter(new Character("Gilang", CharacterType.WARRIOR, 6));     // [BARU - TP13 Bagian B] level 6, akan emas
+
 
         // 2. Jalankan GUI dengan AMAN di Event Dispatch Thread
         SwingUtilities.invokeLater(() -> {

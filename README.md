@@ -1,13 +1,13 @@
 ## TP10 - Tema Tampilan Character Manager (AppTheme)
 
 ## Screenshot sebelum dan sesudah
-Sebelum (v0.3, tampilan polos tanpa tema):
+Sebelum (tampilan polos tanpa tema):
 
 ![MainWindow v0.3](screenshot/tp8-sesudah.png)
 
 Sesudah (v0.4, memakai AppTheme, dengan 7 karakter dan Rata-rata Level 4,9):
 
-![MainWindow v0.4](screenshot/tp10-sesudah-v04.png)
+![MainWindow v0.4](screenshot/hasiltp10.png)
 
 ## Mengapa warna disimpan di AppTheme, bukan di Character
 Character berada di package model dan tugasnya hanya menyimpan data karakter, sedangkan warna adalah urusan tampilan yang seharusnya berada di package view. Jika warna ditaruh di Character, class model ikut bergantung pada library tampilan (java.awt) dan harus diubah setiap kali desain berganti. Dengan AppTheme, seluruh warna, font, dan border berada di satu file, sehingga mengganti tema cukup mengubah satu tempat dan MainWindow tidak perlu disentuh. Pemisahan ini juga terbukti lewat git diff, yaitu package model tidak berubah sama sekali dibandingkan commit TP 8.

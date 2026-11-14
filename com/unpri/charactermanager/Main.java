@@ -1,4 +1,4 @@
-package com.unpri.charactermanager;   // [BARU - TP8] deklarasi package, sesuai letak file di folder charactermanager
+package com.unpri.charactermanager;   // deklarasi package, sesuai letak file di folder charactermanager
 
 import com.unpri.charactermanager.model.Character;
 import com.unpri.charactermanager.model.CharacterType;
@@ -9,20 +9,21 @@ import javax.swing.SwingUtilities;
 public class Main {
     public static void main(String[] args) {
 
-        // 1. Siapkan DATA terlebih dahulu (layer Model) — sama seperti Pertemuan 2
+        // 1. Siapkan DATA terlebih dahulu (layer Model)
         CharacterManager manager = new CharacterManager();
-        manager.addCharacter(new Character("Arjuna", CharacterType.WARRIOR, 5));
-        manager.addCharacter(new Character("Merlin", CharacterType.MAGE, 3));
-        manager.addCharacter(new Character("Athena", CharacterType.ARCHER, 10));   // [DIUBAH - TP8 Bagian B] level 4 jadi 10 untuk bukti statistik berubah
-        manager.addCharacter(new Character("Selene", CharacterType.HEALER, 2));      // [BARU - TP8 Bagian B] karakter ke-5
-        manager.addCharacter(new Character("Lancelot", CharacterType.WARRIOR, 7));   // [BARU - TP8 Bagian B] karakter ke-4
-        manager.addCharacter(new Character("Freya", CharacterType.ARCHER, 1));     // [BARU - TP13 Bagian B] level 1, akan nonaktif
-        manager.addCharacter(new Character("Gandalf", CharacterType.MAGE, 6));     // [BARU - TP13 Bagian B] level 6, akan emas
+        manager.addCharacter(new Character("Arjuna",   CharacterType.WARRIOR, 5));
+        manager.addCharacter(new Character("Merlin",   CharacterType.MAGE,    3));
+        manager.addCharacter(new Character("Athena",   CharacterType.ARCHER,  10));
+        manager.addCharacter(new Character("Selene",   CharacterType.HEALER,  2));
+        manager.addCharacter(new Character("Lancelot", CharacterType.WARRIOR, 7));
+        manager.addCharacter(new Character("Freya",    CharacterType.ARCHER,  1));
+        manager.addCharacter(new Character("Gandalf",  CharacterType.MAGE,    6));
+        manager.addCharacter(new Character("Circe",    CharacterType.MAGE,    2));   // [BARU - Bagian B] karakter ke-8
 
         // 2. Jalankan GUI dengan AMAN di Event Dispatch Thread
         SwingUtilities.invokeLater(() -> {
             MainWindow window = new MainWindow(manager.getAllCharacters());
-            window.setVisible(true);    // WAJIB — tampilkan jendela
+            window.setVisible(true);    // WAJIB: tampilkan jendela
         });
     }
 }

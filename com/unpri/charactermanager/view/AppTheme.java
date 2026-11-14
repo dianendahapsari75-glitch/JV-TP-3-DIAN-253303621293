@@ -30,20 +30,30 @@ public class AppTheme {
     public static final Font FONT_STATISTIK = new Font("SansSerif", Font.BOLD, 14);
 
     // ===== BORDER =====
-    // jarak kosong di sekeliling panel utama
     public static final Border BORDER_PANEL = BorderFactory.createEmptyBorder(12, 12, 12, 12);
-    // garis tipis + jarak dalam untuk setiap kartu
     public static final Border BORDER_KARTU = BorderFactory.createCompoundBorder(
             BorderFactory.createLineBorder(WARNA_GARIS),
             BorderFactory.createEmptyBorder(8, 12, 8, 12));
 
-        // ===== [BARU - TP13 Bagian B] KONSTANTA UNTUK KARAKTER LEVEL TINGGI DAN PEMULA =====
-    public static final int BATAS_LEVEL_TINGGI = 5;    // level >= nilai ini tampil emas dan tebal
-    public static final int BATAS_LEVEL_PEMULA = 1;    // level <= nilai ini dinonaktifkan (abu-abu)
-
-    public static final Color WARNA_EMAS = new Color(184, 134, 11);   // emas gelap agar tetap terbaca di atas warna pastel
+    // ===== KONSTANTA SPRINT #4 (level tinggi dan pemula) =====
+    public static final int BATAS_LEVEL_TINGGI = 5;    // level >= nilai ini dihitung sebagai level tinggi
+    public static final int BATAS_LEVEL_PEMULA = 1;    // level <= nilai ini dianggap pemula
+    public static final Color WARNA_EMAS = new Color(184, 134, 11);
     public static final Font FONT_KARTU_TEBAL = new Font("SansSerif", Font.BOLD, 14);
-    
+
+    // ===== [TP12 Sprint #5] NAMA TAMBAHAN UNTUK MAINWINDOW v0.5 =====
+    // Harus berada DI BAWAH konstanta yang ditunjuknya (kalau di atas: error "illegal forward reference")
+    public static final Color BG_MAIN      = WARNA_LATAR;
+    public static final Color TEXT_MAIN    = WARNA_TEKS;
+    public static final Color TEXT_LIGHT   = WARNA_TEKS;     // kartu pastel, jadi teks tetap gelap
+    public static final Color GOLD         = WARNA_EMAS;
+    public static final Color BG_STATUS    = Color.decode("#0d0d1a");   // latar bar status: lebih gelap
+    public static final Color TEXT_MUTED   = Color.decode("#9d9dbf");   // teks sekunder
+    public static final Font FONT_TITLE    = FONT_JUDUL;
+    public static final Font FONT_BODY     = FONT_KARTU;
+    public static final Font FONT_MONO     = new Font("Monospaced", Font.PLAIN, 13);
+    public static final Border CARD_BORDER = BORDER_KARTU;
+
     // ===== METHOD: pilih warna kartu berdasarkan role =====
     public static Color colorFor(CharacterType type) {
         switch (type) {
@@ -57,6 +67,22 @@ public class AppTheme {
                 return WARNA_HEALER;
             default:
                 return WARNA_LATAR;   // cadangan kalau ada tipe baru
+        }
+    }
+
+    // ===== [TP12 Sprint #5] METHOD: teks tooltip untuk tiap role =====
+    public static String describe(CharacterType type) {
+        switch (type) {
+            case WARRIOR:
+                return "WARRIOR: HP dan attack tinggi";
+            case MAGE:
+                return "MAGE: attack tinggi, HP rendah";
+            case ARCHER:
+                return "ARCHER: seimbang, serangan jarak jauh";
+            case HEALER:
+                return "HEALER: HP tinggi, attack rendah";
+            default:
+                return type.name();
         }
     }
 }
